@@ -1,15 +1,9 @@
 import { createContext, use, type ReactNode, type Context } from "react";
 
-type ContextEntry<T> = [keyof T, Context<T[keyof T]>];
-
-type FromEntries<T extends [PropertyKey, unknown][]> = {
-    [K in T[number][0]]: Extract<T[number], [K, unknown]>[1];
-};
-
-export function createNestedContexts<T extends object>(initValue: T) {
+export function createNestedContexts<T extends Record<string, unknown>>(initValue: T) {
     const entries = Object.entries(initValue) as [keyof T, T[keyof T]][];
     const contextEntries = entries.map(([k, v]) => [k, createContext(v)] as const);
-    const contextDict = Object.fromEntries(contextEntries) as FromEntries<ContextEntry<T>[]>;
+    const contextRecord = Object.fromEntries(contextEntries) as Record<keyof T, Context<T[keyof T]>>;
 
     function NestedContexts(
         { values, children }: { values: T, children?: ReactNode }
@@ -21,7 +15,7 @@ export function createNestedContexts<T extends object>(initValue: T) {
     };
 
     function useNestedContexts<const Ks extends readonly (keyof T)[]>(...keys: Ks) {
-        return Object.fromEntries(keys.map(k => [k, use(contextDict[k])])) as { [K in Ks[number]]: T[K] };
+        return Object.fromEntries(keys.map(k => [k, use(contextRecord[k])])) as { [K in Ks[number]]: T[K] };
     }
 
     return [NestedContexts, useNestedContexts] as const;
