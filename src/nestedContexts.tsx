@@ -1,7 +1,5 @@
 import { createContext, use, type ReactNode, type Context } from "react";
 
-type Entry<T> = [keyof T, T[keyof T]];
-
 type ContextEntry<T> = [keyof T, Context<T[keyof T]>];
 
 type FromEntries<T extends [PropertyKey, unknown][]> = {
@@ -9,7 +7,7 @@ type FromEntries<T extends [PropertyKey, unknown][]> = {
 };
 
 export function createNestedContexts<T extends object>(initValue: T) {
-    const entries = Object.entries(initValue) as Entry<T>[];
+    const entries = Object.entries(initValue) as [keyof T, T[keyof T]][];
     const contextEntries = entries.map(([k, v]) => [k, createContext(v)] as const);
     const contextDict = Object.fromEntries(contextEntries) as FromEntries<ContextEntry<T>[]>;
 
