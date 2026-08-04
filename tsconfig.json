@@ -16,5 +16,5 @@
     "noEmit": true,
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "tsup.config.ts", "vitest.config.ts"]
+  "include": ["src", "tsup.config.ts", "vitest.config.ts", "tests/setup.ts", "tests/nestedContexts.test.tsx"]
 }
