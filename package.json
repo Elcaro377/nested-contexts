@@ -1,7 +1,7 @@
 {
   "name": "nested-contexts",
   "version": "0.1.0",
-  "description": "通过嵌套 React Context 精确订阅其中的部分数据。",
+  "description": "A minimal, lightweight React utility for precise subscriptions via nested Contexts, avoiding re-renders of components subscribed to unrelated fields. 极简轻量 React 工具库：通过嵌套 Context 实现精确订阅，避免订阅无关字段的组件重渲染。",
   "keywords": [
     "react",
     "context",
@@ -10,6 +10,15 @@
     "typescript"
   ],
   "license": "MIT",
+  "author": "Elcaro377 <Elcaro377@outlook.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elcaro377/nested-contexts.git"
+  },
+  "homepage": "https://github.com/Elcaro377/nested-contexts#readme",
+  "bugs": {
+    "url": "https://github.com/Elcaro377/nested-contexts/issues"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -18,7 +27,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -39,7 +49,7 @@
     "prepublishOnly": "npm run typecheck && npm run test"
   },
   "peerDependencies": {
-    "react": ">=18.0.0"
+    "react": ">=19.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^7.0.0",
